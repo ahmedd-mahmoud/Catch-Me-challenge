@@ -1,4 +1,20 @@
+#container {
+  position: relative;
+  width: 50%;
+  height: 80vh;
+  border: 5px solid #000;
+  margin: auto;
+}
+p {
+  font-size: 48px;
+}
+
+#counter-text {
+  text-align: center;
+}
+
 #random-button {
+  position: absolute;
   font-size: 32px;
   padding: 8px 12px;
   background-color: #007bff;
@@ -7,6 +23,7 @@
   border-radius: 4px;
   cursor: pointer;
   outline: none;
+  transform: translate(-50%, -50%);
 }
 
 #random-button:hover {
