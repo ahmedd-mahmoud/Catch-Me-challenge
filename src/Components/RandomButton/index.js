@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const RandomButton = () => {
-  const [position, setPosition] = useState({ top: "50%", left: "50%" });
+const RandomButton = ({ count, setCount }) => {
+  const [position, setPosition] = useState({ top: "50%", left: "47%" });
   const [text, setText] = useState("Start");
-  const [count, setCount] = useState(0);
 
   const handleClick = () => {
     const container = document.getElementById("container");
@@ -33,15 +32,9 @@ const RandomButton = () => {
   };
 
   return (
-    <div>
-      <p id="title-text">Catch me if you can:</p>
-      <p id="counter-text">Counter: {count}</p>
-      <div id="container">
-        <button onClick={handleClick} id="random-button" style={buttonStyle}>
-          {text}
-        </button>
-      </div>
-    </div>
+    <button onClick={handleClick} id="random-button" style={buttonStyle}>
+      {text}
+    </button>
   );
 };
 
