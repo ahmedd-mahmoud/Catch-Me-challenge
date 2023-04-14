@@ -6,13 +6,11 @@
   margin: auto;
 }
 #title {
-  font-size: 48px;
+  font-size: 50px;
+  margin-left: 50px;
 }
 
-p {
-  font-size: 48px;
-}
-
-#counter-text {
+#score-text {
   text-align: center;
+  font-size: 48px;
 }
