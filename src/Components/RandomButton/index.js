@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./index.css";
+import React, { useRef, useState } from "react";
+import "./styles.css";
 
 const RandomButton = ({ count, setCount, containerRef }) => {
   const [position, setPosition] = useState({ top: "50%", left: "50%" });
@@ -7,25 +7,30 @@ const RandomButton = ({ count, setCount, containerRef }) => {
   const [gameState, setGameState] = useState("initial");
   const buttonRef = useRef(null);
 
-  useEffect(() => {
-    if (gameState === "in game") {
-      const timer = setTimeout(() => {
-        setGameState("lost");
-      }, 10000);
-      return () => clearTimeout(timer);
-    }
-  }, [gameState]);
+  // useEffect(() => {
+  //   if (gameState === "in game") {
+  //     const timer = setTimeout(() => {
+  //       setGameState("lost");
+  //     }, 10000);
+  //     return () => {
+  //       clearTimeout(timer);
+  //     };
+  //   }
+  // }, [gameState]);
 
   const handleClick = () => {
     if (gameState === "initial") {
       setGameState("in game");
       setText("Catch me!");
     } else if (gameState === "in game") {
+      setTimeout(() => {
+        setGameState("lost");
+      }, 10000);
       if (count === 4) {
         setGameState("won");
       }
     }
-    setCount(count + 1);
+    setCount((prevCount) => prevCount + 1);
 
     const container = containerRef.current;
     const button = buttonRef.current;
