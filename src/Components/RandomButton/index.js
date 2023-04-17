@@ -52,18 +52,32 @@ const RandomButton = ({ count, setCount, containerRef }) => {
     left: position.left,
   };
 
+  const handleRestart = () => {
+    setPosition({
+      top: "50%",
+      left: "50%",
+    });
+    setText("Start Game");
+    setGameState("initial");
+    setCount(0);
+  };
+
   return (
     <>
       {gameState === "won" && (
         <div className="result-text">
           <h1>You won!</h1>
-          <p className="refresh-text">Refresh to try again</p>
+          <button className="restart-button" onClick={handleRestart}>
+            Restart Game
+          </button>
         </div>
       )}
       {gameState === "lost" && (
         <div className="result-text">
           <h1>Game over!</h1>
-          <p className="refresh-text">Refresh to try again</p>
+          <button className="restart-button" onClick={handleRestart}>
+            Restart Game
+          </button>
         </div>
       )}
       {gameState !== "won" && gameState !== "lost" && (

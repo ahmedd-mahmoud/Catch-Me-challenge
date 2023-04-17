@@ -22,8 +22,17 @@
   text-align: center;
 }
 
-.refresh-text {
+.restart-button {
   font-size: 32px;
+  padding: 8px 12px;
+  background-color: rgb(20, 173, 20);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.restart-button:hover {
+  background-color: rgb(23, 199, 23);
 }
 
 h1 {
