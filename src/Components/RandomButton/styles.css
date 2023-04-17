@@ -35,6 +35,12 @@
   background-color: rgb(23, 199, 23);
 }
 
-h1 {
+#win-text {
   font-size: 128px;
+  color: rgb(0, 64, 255);
+}
+
+#lose-text {
+  font-size: 128px;
+  color: red;
 }

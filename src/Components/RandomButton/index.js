@@ -1,31 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles.css";
 
-const RandomButton = ({ count, setCount, containerRef }) => {
+const RandomButton = ({ count, setCount, containerRef, timer, setTimer }) => {
   const [position, setPosition] = useState({ top: "50%", left: "50%" });
   const [text, setText] = useState("Start Game");
   const [gameState, setGameState] = useState("initial");
+
   const buttonRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (gameState === "in game") {
-  //     const timer = setTimeout(() => {
-  //       setGameState("lost");
-  //     }, 10000);
-  //     return () => {
-  //       clearTimeout(timer);
-  //     };
-  //   }
-  // }, [gameState]);
+  useEffect(() => {
+    if (gameState === "in game" && timer > 0) {
+      setTimeout(() => {
+        setTimer((prevtimer) => prevtimer - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      setGameState("lost");
+    }
+  }, [gameState, timer, setTimer]);
 
   const handleClick = () => {
     if (gameState === "initial") {
       setGameState("in game");
       setText("Catch me!");
     } else if (gameState === "in game") {
-      setTimeout(() => {
-        setGameState("lost");
-      }, 10000);
       if (count === 4) {
         setGameState("won");
       }
@@ -60,13 +57,14 @@ const RandomButton = ({ count, setCount, containerRef }) => {
     setText("Start Game");
     setGameState("initial");
     setCount(0);
+    setTimer(10);
   };
 
   return (
     <>
       {gameState === "won" && (
         <div className="result-text">
-          <h1>You won!</h1>
+          <h1 id="win-text">You Won!</h1>
           <button className="restart-button" onClick={handleRestart}>
             Restart Game
           </button>
@@ -74,7 +72,7 @@ const RandomButton = ({ count, setCount, containerRef }) => {
       )}
       {gameState === "lost" && (
         <div className="result-text">
-          <h1>Game over!</h1>
+          <h1 id="lose-text">Game Over!</h1>
           <button className="restart-button" onClick={handleRestart}>
             Restart Game
           </button>
