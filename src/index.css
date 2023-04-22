@@ -6,24 +6,24 @@ body {
 #container {
   position: relative;
   width: 50%;
-  height: 70vh;
+  height: 50vh;
   border: 5px solid #066baa;
   margin: auto;
 }
 #title {
-  font-size: 50px;
+  font-size: 30px;
   margin-left: 50px;
   color: #196899;
 }
 
 #timer {
-  font-size: 50px;
+  font-size: 30px;
   margin-left: 50px;
   color: rgb(214, 2, 2);
 }
 
 #score-text {
   text-align: center;
-  font-size: 48px;
+  font-size: 32px;
   margin-top: 5px;
 }
