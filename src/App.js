@@ -12,6 +12,7 @@ function App() {
       <div>
         <p id="title">Catch me if you can:</p>
       </div>
+      {/* you distoried component tree*/}
       <div id="container" ref={containerRef}>
         <RandomButton
           count={count}
@@ -24,6 +25,7 @@ function App() {
         />
       </div>
 
+      {/* why you tied the score counter with timer ?  */}
       {gameState !== GameStateEnum.INITIAL && (
         <div>
           <p id="score-text">Score: {count}</p>
