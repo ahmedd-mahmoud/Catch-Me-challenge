@@ -17,22 +17,22 @@ const RandomButton = ({
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    if (gameState === GameStateEnum.InGame && timer > 0) {
+    if (gameState === GameStateEnum.INGAME && timer > 0) {
       setTimeout(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     } else if (timer === 0) {
-      setGameState(GameStateEnum.Lost);
+      setGameState(GameStateEnum.LOST);
     }
   }, [gameState, setGameState, timer, setTimer]);
 
   const handleStart = () => {
-    if (gameState === GameStateEnum.Initial) {
-      setGameState(GameStateEnum.InGame);
+    if (gameState === GameStateEnum.INITIAL) {
+      setGameState(GameStateEnum.INGAME);
       setButtonText("Catch me!");
-    } else if (gameState === GameStateEnum.InGame) {
+    } else if (gameState === GameStateEnum.INGAME) {
       if (count === 4) {
-        setGameState(GameStateEnum.Won);
+        setGameState(GameStateEnum.WON);
       }
     }
     setCount((prevCount) => prevCount + 1);
@@ -63,18 +63,18 @@ const RandomButton = ({
       left: "50%",
     });
     setButtonText("Start Game");
-    setGameState(GameStateEnum.Initial);
+    setGameState(GameStateEnum.INITIAL);
     setCount(0);
     setTimer(10);
   };
 
   return (
     <>
-      {gameState !== GameStateEnum.Initial &&
-        gameState !== GameStateEnum.InGame && (
+      {gameState !== GameStateEnum.INITIAL &&
+        gameState !== GameStateEnum.INGAME && (
           <div className="result">
             <h1 id="result-text">
-              {gameState === GameStateEnum.Won ? "You Won!" : "Game Over!"}
+              {gameState === GameStateEnum.WON ? "You Won!" : "Game Over!"}
             </h1>
             <button className="restart-button" onClick={handleRestart}>
               Restart Game
@@ -82,7 +82,7 @@ const RandomButton = ({
           </div>
         )}
 
-      {gameState !== GameStateEnum.Won && gameState !== GameStateEnum.Lost && (
+      {gameState !== GameStateEnum.WON && gameState !== GameStateEnum.LOST && (
         <button
           ref={buttonRef}
           onClick={handleStart}
