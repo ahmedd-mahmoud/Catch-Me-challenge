@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { GameStateEnum } from "../../Enums/GameStateEnum";
 import "./styles.css";
 
@@ -10,10 +10,9 @@ const RandomButton = ({
   setTimer,
   gameState,
   setGameState,
+  position,
+  setPosition,
 }) => {
-  const [position, setPosition] = useState({ top: "50%", left: "50%" });
-  const [buttonText, setButtonText] = useState("Start Game");
-
   const buttonRef = useRef(null);
 
   useEffect(() => {
@@ -29,14 +28,12 @@ const RandomButton = ({
   const handleStart = () => {
     if (gameState === GameStateEnum.INITIAL) {
       setGameState(GameStateEnum.INGAME);
-      setButtonText("Catch me!");
     } else if (gameState === GameStateEnum.INGAME) {
+      setCount((prevCount) => prevCount + 1);
       if (count === 4) {
         setGameState(GameStateEnum.WON);
       }
     }
-    setCount((prevCount) => prevCount + 1);
-
     const container = containerRef.current;
     const button = buttonRef.current;
 
@@ -57,32 +54,9 @@ const RandomButton = ({
     left: position.left,
   };
 
-  const handleRestart = () => {
-    setPosition({
-      top: "50%",
-      left: "50%",
-    });
-    setButtonText("Start Game");
-    setGameState(GameStateEnum.INITIAL);
-    setCount(0);
-    setTimer(10);
-  };
-
   return (
     <>
-      {gameState !== GameStateEnum.INITIAL &&
-        gameState !== GameStateEnum.INGAME && (
-          <div className="result">
-            <h1 id="result-text">
-              {gameState === GameStateEnum.WON ? "You Won!" : "Game Over!"}
-            </h1>
-            <button className="restart-button" onClick={handleRestart}>
-              Restart Game
-            </button>
-          </div>
-        )}
-
-      {/* why are you hidding the box when you can just render the wining status box above it as absolute ?*/}
+      {/* why are you hidding the button when you can just render the wining status box above it as absolute ?*/}
       {/* why not at a game state called end game ? review you states carfully */}
       {gameState !== GameStateEnum.WON && gameState !== GameStateEnum.LOST && (
         <button
@@ -91,7 +65,7 @@ const RandomButton = ({
           id="random-button"
           style={buttonStyle}
         >
-          {buttonText}
+          {gameState === GameStateEnum.INITIAL ? "Start Game" : "Catch Me!"}
         </button>
       )}
     </>
