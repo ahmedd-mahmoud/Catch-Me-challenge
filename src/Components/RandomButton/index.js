@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { GameStateEnum } from "../../Enums/GameStateEnum";
 import "./styles.css";
 
@@ -10,33 +10,30 @@ const RandomButton = ({
   setTimer,
   gameState,
   setGameState,
+  position,
+  setPosition,
 }) => {
-  const [position, setPosition] = useState({ top: "50%", left: "50%" });
-  const [buttonText, setButtonText] = useState("Start Game");
-
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    if (gameState === GameStateEnum.InGame && timer > 0) {
+    if (gameState === GameStateEnum.INGAME && timer > 0) {
       setTimeout(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     } else if (timer === 0) {
-      setGameState(GameStateEnum.Lost);
+      setGameState(GameStateEnum.LOST);
     }
   }, [gameState, setGameState, timer, setTimer]);
 
   const handleStart = () => {
-    if (gameState === GameStateEnum.Initial) {
-      setGameState(GameStateEnum.InGame);
-      setButtonText("Catch me!");
-    } else if (gameState === GameStateEnum.InGame) {
+    if (gameState === GameStateEnum.INITIAL) {
+      setGameState(GameStateEnum.INGAME);
+    } else if (gameState === GameStateEnum.INGAME) {
+      setCount((prevCount) => prevCount + 1);
       if (count === 4) {
-        setGameState(GameStateEnum.Won);
+        setGameState(GameStateEnum.WON);
       }
     }
-    setCount((prevCount) => prevCount + 1);
-
     const container = containerRef.current;
     const button = buttonRef.current;
 
@@ -57,39 +54,18 @@ const RandomButton = ({
     left: position.left,
   };
 
-  const handleRestart = () => {
-    setPosition({
-      top: "50%",
-      left: "50%",
-    });
-    setButtonText("Start Game");
-    setGameState(GameStateEnum.Initial);
-    setCount(0);
-    setTimer(10);
-  };
-
   return (
     <>
-      {gameState !== GameStateEnum.Initial &&
-        gameState !== GameStateEnum.InGame && (
-          <div className="result">
-            <h1 id="result-text">
-              {gameState === GameStateEnum.Won ? "You Won!" : "Game Over!"}
-            </h1>
-            <button className="restart-button" onClick={handleRestart}>
-              Restart Game
-            </button>
-          </div>
-        )}
-
-      {gameState !== GameStateEnum.Won && gameState !== GameStateEnum.Lost && (
+      {/* why are you hidding the button when you can just render the wining status box above it as absolute ?*/}
+      {/* why not at a game state called end game ? review you states carfully */}
+      {gameState !== GameStateEnum.WON && gameState !== GameStateEnum.LOST && (
         <button
           ref={buttonRef}
           onClick={handleStart}
           id="random-button"
           style={buttonStyle}
         >
-          {buttonText}
+          {gameState === GameStateEnum.INITIAL ? "Start Game" : "Catch Me!"}
         </button>
       )}
     </>
