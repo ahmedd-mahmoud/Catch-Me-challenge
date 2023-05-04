@@ -7,6 +7,7 @@ function App() {
   const [timer, setTimer] = useState(10);
   const [gameState, setGameState] = useState(GameStateEnum.INITIAL);
   const [position, setPosition] = useState({ top: "50%", left: "50%" });
+  const [result, setResult] = useState("Game Over!");
   const [highScore, setHighScore] = useState(
     localStorage.getItem("highScore") || 0
   );
@@ -54,12 +55,12 @@ function App() {
           setGameState={setGameState}
           position={position}
           setPosition={setPosition}
+          setResult={setResult}
+          highScore={highScore}
         />
         {gameState === GameStateEnum.ENDGAME && (
           <div className="result">
-            <h1 id="result-text">
-              {highScore < count + 1 ? "New Highscore!" : "Game Over!"}
-            </h1>
+            <h1 id="result-text">{result}</h1>
             <div className="result-buttons">
               <button className="restart-button" onClick={handleRestart}>
                 Try again

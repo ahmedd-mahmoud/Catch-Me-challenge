@@ -12,6 +12,8 @@ const RandomButton = ({
   setGameState,
   position,
   setPosition,
+  setResult,
+  highScore,
 }) => {
   const buttonRef = useRef(null);
 
@@ -45,6 +47,16 @@ const RandomButton = ({
     setPosition({
       top: randomTop,
       left: randomLeft,
+    });
+    setResult(() => {
+      if (count > highScore) {
+        return "New Highscore";
+      }
+      if (highScore === 0) {
+        return "New Highscore";
+      } else {
+        return "Game Over";
+      }
     });
   };
 
