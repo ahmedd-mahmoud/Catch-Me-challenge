@@ -37,8 +37,10 @@ const RandomButton = ({
     const containerWidth = container.offsetWidth - button.offsetWidth;
     const containerHeight = container.offsetHeight - button.offsetHeight;
 
-    const randomLeft = Math.random() * containerWidth;
-    const randomTop = Math.random() * containerHeight;
+    const randomLeft =
+      Math.random() * containerWidth + 0.5 * button.offsetWidth;
+    const randomTop =
+      Math.random() * containerHeight + 0.5 * button.offsetHeight;
 
     setPosition({
       top: randomTop,

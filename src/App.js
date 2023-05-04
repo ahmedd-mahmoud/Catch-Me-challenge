@@ -58,9 +58,7 @@ function App() {
         {gameState === GameStateEnum.ENDGAME && (
           <div className="result">
             <h1 id="result-text">
-              {highScore < count + 1 && gameState !== GameStateEnum.ENDGAME
-                ? "New Highscore!"
-                : "Game Over!"}
+              {highScore < count + 1 ? "New Highscore!" : "Game Over!"}
             </h1>
             <div className="result-buttons">
               <button className="restart-button" onClick={handleRestart}>
