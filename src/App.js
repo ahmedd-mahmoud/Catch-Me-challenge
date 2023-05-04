@@ -2,8 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import RandomButton from "./Components/RandomButton";
 import { GameStateEnum } from "./Enums/GameStateEnum"; // very good
 
-let IsReset = false;
-
 function App() {
   const [count, setCount] = useState(0);
   const [timer, setTimer] = useState(10);
@@ -29,13 +27,11 @@ function App() {
     setGameState(GameStateEnum.INITIAL);
     setCount(0);
     setTimer(10);
-    IsReset = false;
   };
 
   const handleResetHighscore = () => {
     localStorage.setItem("highScore", 0);
     setHighScore(0);
-    IsReset = true;
   };
 
   return (
@@ -62,7 +58,7 @@ function App() {
         {gameState === GameStateEnum.ENDGAME && (
           <div className="result">
             <h1 id="result-text">
-              {highScore < count + 1 && !IsReset
+              {highScore < count + 1 && gameState !== GameStateEnum.ENDGAME
                 ? "New Highscore!"
                 : "Game Over!"}
             </h1>
