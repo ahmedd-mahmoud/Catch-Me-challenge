@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import RandomButton from "./Components/RandomButton";
 import { GameStateEnum } from "./Enums/GameStateEnum"; // very good
 
+let IsReset = false;
+
 function App() {
   const [count, setCount] = useState(0);
   const [timer, setTimer] = useState(10);
@@ -27,14 +29,24 @@ function App() {
     setGameState(GameStateEnum.INITIAL);
     setCount(0);
     setTimer(10);
+    IsReset = false;
+  };
+
+  const handleResetHighscore = () => {
+    localStorage.setItem("highScore", 0);
+    setHighScore(0);
+    IsReset = true;
   };
 
   return (
     <div>
-      <div>
+      <div id="title-highscore-div">
         <p id="title">Catch me if you can:</p>
+        <div id="highscore-div">
+          <p id="highscore-text">Highscore: {highScore}</p>
+        </div>
       </div>
-      <p id="highscore-text">Highscore: {highScore}</p>
+
       <div id="container" ref={containerRef}>
         <RandomButton
           count={count}
@@ -47,18 +59,23 @@ function App() {
           position={position}
           setPosition={setPosition}
         />
-
-        {gameState !== GameStateEnum.INITIAL &&
-          gameState !== GameStateEnum.INGAME && (
-            <div className="result">
-              <h1 id="result-text">
-                {highScore < count + 1 ? "New Highscore!" : "Game Over!"}
-              </h1>
+        {gameState === GameStateEnum.ENDGAME && (
+          <div className="result">
+            <h1 id="result-text">
+              {highScore < count + 1 && !IsReset
+                ? "New Highscore!"
+                : "Game Over!"}
+            </h1>
+            <div className="result-buttons">
               <button className="restart-button" onClick={handleRestart}>
-                Restart Game
+                Try again
+              </button>
+              <button id="reset-button" onClick={handleResetHighscore}>
+                Reset Highscore
               </button>
             </div>
-          )}
+          </div>
+        )}
       </div>
 
       {gameState !== GameStateEnum.INITIAL && (

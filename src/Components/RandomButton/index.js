@@ -54,7 +54,6 @@ const RandomButton = ({
   return (
     <>
       {/* why are you hidding the button when you can just render the wining status box above it as absolute ?*/}
-      {/* why not at a game state called end game ? review you states carfully */}
       {gameState !== GameStateEnum.ENDGAME && (
         <button
           ref={buttonRef}

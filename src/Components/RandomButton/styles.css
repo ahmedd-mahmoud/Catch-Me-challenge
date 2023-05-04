@@ -14,30 +14,3 @@
 #random-button:hover {
   background-color: #0056b3;
 }
-
-.result {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.restart-button {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px 12px;
-  background-color: rgb(20, 173, 20);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.restart-button:hover {
-  background-color: rgb(23, 199, 23);
-}
-
-#result-text {
-  font-size: 64px;
-  color: red;
-}
