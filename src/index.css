@@ -5,8 +5,8 @@ body {
 }
 #container {
   position: relative;
-  width: 50%;
-  height: 50vh;
+  width: 63%;
+  height: 56vh;
   border: 5px solid #066baa;
   margin: auto;
 }
@@ -26,4 +26,10 @@ body {
   text-align: center;
   font-size: 32px;
   margin-top: 5px;
+}
+
+#highscore-text {
+  text-align: right;
+  font-size: 25px;
+  margin-right: 50px;
 }

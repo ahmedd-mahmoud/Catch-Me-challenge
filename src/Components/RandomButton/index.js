@@ -21,7 +21,7 @@ const RandomButton = ({
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     } else if (timer === 0) {
-      setGameState(GameStateEnum.LOST);
+      setGameState(GameStateEnum.ENDGAME);
     }
   }, [gameState, setGameState, timer, setTimer]);
 
@@ -30,9 +30,6 @@ const RandomButton = ({
       setGameState(GameStateEnum.INGAME);
     } else if (gameState === GameStateEnum.INGAME) {
       setCount((prevCount) => prevCount + 1);
-      if (count === 4) {
-        setGameState(GameStateEnum.WON);
-      }
     }
     const container = containerRef.current;
     const button = buttonRef.current;
@@ -58,7 +55,7 @@ const RandomButton = ({
     <>
       {/* why are you hidding the button when you can just render the wining status box above it as absolute ?*/}
       {/* why not at a game state called end game ? review you states carfully */}
-      {gameState !== GameStateEnum.WON && gameState !== GameStateEnum.LOST && (
+      {gameState !== GameStateEnum.ENDGAME && (
         <button
           ref={buttonRef}
           onClick={handleStart}
