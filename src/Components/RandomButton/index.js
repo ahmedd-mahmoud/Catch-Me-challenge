@@ -16,7 +16,7 @@ const RandomButton = ({
   highScore,
 }) => {
   const buttonRef = useRef(null);
-
+  console.log(buttonRef);
   useEffect(() => {
     if (gameState === GameStateEnum.INGAME && timer > 0) {
       setTimeout(() => {
@@ -49,13 +49,13 @@ const RandomButton = ({
       left: randomLeft,
     });
     setResult(() => {
-      if (count > highScore) {
-        return "New Highscore";
+      if (count + 1 > highScore) {
+        return "New Highscore!";
       }
       if (highScore === 0) {
-        return "New Highscore";
+        return "New Highscore!";
       } else {
-        return "Game Over";
+        return "Game Over!";
       }
     });
   };
@@ -67,7 +67,6 @@ const RandomButton = ({
 
   return (
     <>
-      {/* why are you hidding the button when you can just render the wining status box above it as absolute ?*/}
       {gameState !== GameStateEnum.ENDGAME && (
         <button
           ref={buttonRef}
